@@ -35,6 +35,7 @@ public class UsuarioService {
         usuarioExistente.setEmail(usuario.getEmail());
         usuarioExistente.setTelefone(usuario.getTelefone());
         usuarioExistente.setDataNascimento(usuario.getDataNascimento());
+        usuarioExistente.setPermissao(usuario.getPermissao());
 
         return usuarioRepository.save(usuarioExistente);
 

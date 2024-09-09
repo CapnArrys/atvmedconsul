@@ -1,10 +1,12 @@
 package br.com.arrys.medicalconsult.usuario.domain;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.Date;
 
+@Getter
+@Setter
 @Data
 @Entity
 @Table(name = "USUARIOS")
@@ -23,17 +25,20 @@ public class Usuario {
     private String telefone;
     @Column(name = "DATA_NASCIMENTO")
     private Date dataNascimento;
-//    private Permissao permissao;
+
+    @Column(name = "PERMISSAO")
+    private Permissao permissao;
 
     public Usuario() {
     }
 
-    public Usuario(long idUsuario, String nomeUsuario, String email, String cpf, String telefone, Date dataNascimento) {
+    public Usuario(long idUsuario, String nomeUsuario, String email, String cpf, String telefone, Date dataNascimento, Permissao permissao) {
         this.idUsuario = idUsuario;
         this.nomeUsuario = nomeUsuario;
         this.email = email;
         this.cpf = cpf;
         this.telefone = telefone;
         this.dataNascimento = dataNascimento;
+        this.permissao = permissao;
     }
 }
