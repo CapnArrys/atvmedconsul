@@ -1,0 +1,254 @@
+openapi: 3.0.1
+info:
+  title: Gerenciamento de Consultas
+  description: O Gerenciamento de Consultas é uma API REST que simula o gerenciamento das consultas de uma clínica, com a finalidade de testes de API.
+  version: v0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+    termsOfService: http://swagger.io/terms/
+tags:
+  - name: usuario
+    description: Gerencie os usuários, liste usuarios existentes, crie um novo usuario, busque ou exclua ou atualize um usuario especifico
+    externalDocs:
+      description: Descubra mais
+      url: http://swagger.io
+  - name: consulta
+    description: Gerencie consultas, liste todas as consultas existentes, crie uma nova consulta, busque ou exclua ou atualize uma consulta especifica
+    externalDocs:
+      description: Descubra mais
+      url: http://swagger.io
+paths:
+  /usuarios/{id}:
+    get:
+      tags:
+        - usuario
+      summary: Buscar um usuário
+      description: Busca um Usuário cadastrado, pelo ID
+      operationId: buscarUsuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Usuario"
+    put:
+      tags:
+        - usuario
+      summary: Atualizar um Usuário
+      description: Atualiza um Usuário cadastrado, pelo ID
+      operationId: atualizarUsuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Usuario"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Usuario"
+    delete:
+      tags:
+        - usuario
+      summary: Excluir um Usuário
+      description: Exclui um Usuário cadastrado, pelo ID
+      operationId: excluirUsuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+  /consultas/{id}:
+    get:
+      tags:
+        - consulta
+      summary: Buscar uma consulta
+      description: Busca uma Consulta cadastrada, pelo ID
+      operationId: buscarConsulta
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Consulta"
+    put:
+      tags:
+        - consulta
+      summary: Atualizar uma Consulta
+      description: Atualiza uma Consulta cadastrada, pelo ID
+      operationId: atualizarConsulta
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Consulta"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Consulta"
+    delete:
+      tags:
+        - consulta
+      summary: Excluir uma Consulta
+      description: Exclui uma Consulta cadastrada, pelo ID
+      operationId: excluirConsulta
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+  /usuarios:
+    get:
+      tags:
+        - usuario
+      summary: Mostrar todos os Usuários
+      description: Lista todos os usuários cadastrados
+      operationId: listarUsuario
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Usuario"
+    post:
+      tags:
+        - usuario
+      summary: Criar um Usuário
+      description: Cria um novo Usuário, cadastrando no sistema
+      operationId: cadastrarUsuario
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Usuario"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Usuario"
+  /consultas:
+    get:
+      tags:
+        - consulta
+      summary: Mostrar todas as consultas
+      description: Lista todas as consultas cadastradas
+      operationId: listarConsultas
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Consulta"
+    post:
+      tags:
+        - consulta
+      summary: Criar uma Consulta
+      description: Cria uma nova Consulta, cadastrando no sistema
+      operationId: cadastrarConsulta
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Consulta"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Consulta"
+components:
+  schemas:
+    Usuario:
+      type: object
+      properties:
+        idUsuario:
+          type: integer
+          format: int64
+        nomeUsuario:
+          type: string
+        email:
+          type: string
+        cpf:
+          type: string
+        telefone:
+          type: string
+        dataNascimento:
+          type: string
+          format: date-time
+        permissao:
+          type: string
+          enum:
+            - ADMIN
+            - SECRETARIO
+    Consulta:
+      type: object
+      properties:
+        idConsulta:
+          type: integer
+          format: int64
+        dataConsulta:
+          type: string
+          format: date-time
+        especialidade:
+          type: string
+        profissional:
+          type: string
