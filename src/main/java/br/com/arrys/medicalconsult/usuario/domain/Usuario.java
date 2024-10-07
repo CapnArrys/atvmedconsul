@@ -1,9 +1,12 @@
 package br.com.arrys.medicalconsult.usuario.domain;
 
+import br.com.arrys.medicalconsult.consulta.domain.Consulta;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -28,6 +31,10 @@ public class Usuario {
 
     @Column(name = "PERMISSAO")
     private Permissao permissao;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Consulta> consultas;
 
     public Usuario() {
     }

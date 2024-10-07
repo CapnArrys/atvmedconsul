@@ -26,7 +26,6 @@ public class Consulta {
     private String profissional;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "idUsuario")
     private Usuario usuario;
 
