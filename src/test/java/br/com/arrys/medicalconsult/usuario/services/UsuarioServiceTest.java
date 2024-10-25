@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -65,7 +66,38 @@ class UsuarioServiceTest {
         );
     }
 
+    @Test
+    void buscarUsuario(){
+        Usuario user = new Usuario();
+        user.setNomeUsuario("David Hayter");
 
 
+        when(usuarioRepository.findById(user.getIdUsuario())).thenReturn(Optional.of(user));
 
+
+        var resultado = usuarioService.buscarUsuario(user.getIdUsuario());
+
+
+        assertAll(
+                () -> assertNotNull(resultado),
+                () -> assertEquals("David Hayter", resultado.getNomeUsuario())
+        );
+
+    }
+
+    @Test
+    void deletarUsuario(){
+        Usuario usuario = new Usuario();
+        usuario.setNomeUsuario("Herobrine");
+        usuario.setIdUsuario(1);
+
+        when(usuarioRepository.findById(usuario.getIdUsuario())).thenReturn(Optional.of(usuario));
+
+
+        usuarioService.excluirUsuario(usuario.getIdUsuario());
+
+
+        verify(usuarioRepository, times(1)).delete(usuario);
+
+    }
 }
