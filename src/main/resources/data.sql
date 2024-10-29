@@ -1,0 +1,9 @@
+INSERT INTO USUARIOS(NOME_USUARIO, EMAIL, CPF, TELEFONE, DATA_NASCIMENTO, PERMISSAO)
+VALUES ('Fulano', 'Fulano@Gmail.com', '12345678910', '83987654321', '1980-01-01', 'ADMIN'),
+ ('Beltrano', 'beltrano@Gmail.com', '12345678910', '83987654321', '1980-01-01', 'SECRETARIO'),
+ ('Sicrano', 'Sicrano@Gmail.com', '12345678910', '83987654321', '1980-01-01', 'PACIENTE');
+
+INSERT INTO CONSULTAS(DATA_CONSULTA, PROFISSIONAL, ESPECIALIDADE, id_usuario)
+VALUES ('2024-10-20', 'Dr. João', 'Cardiologista', 3),
+('2024-10-21', 'Dr. Pedro', 'Dermatologista', 3);
+
